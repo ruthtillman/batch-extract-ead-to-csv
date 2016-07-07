@@ -8,7 +8,8 @@ def multipleParts(partsPath,tree):
     global creator
     partsList = tree.xpath(partsPath)
     for part in partsList:
-        creator = creator + etree.tostring(part, encoding='unicode_escape', method='text').strip() + "|"
+        creator = creator + etree.tostring(part, encoding='unicode_escape', method='text').strip() + " " # This may need to be edited for your preferred separator between <part> elements.
+    creator = creator.strip() + "|"
 
 def multipleCreators(genPath,tree):
     global creator

@@ -8,6 +8,7 @@ The extractor adds hardcoded fields for `type`, `owner`, and `access` and the fi
 
 ## To use
 
-1. Edit variable `directory` (line 60) or turn it into a `raw_input` string and add to the end.
-2. Edit appropriate lines in `createCSV` (line 71). Lines which should be considered have comments explaining the internal uses.
-3. Run `python process.py`
+1. Edit variable `directory` (line 61) or turn it into a `raw_input` string and add to the end.
+2. Edit appropriate lines in `createCSV` (line 72). Lines which should be considered have comments explaining the internal uses.
+3. Make any decisions in line 11 re: the desired separator between `<part>` elements
+4. Run `python process.py`
