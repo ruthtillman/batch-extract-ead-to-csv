@@ -77,7 +77,7 @@ def createCSV(directory, outputFile):
     global creator, scopeAndContent
     os.chdir(directory)
     f = open(outputFile, 'w')
-    f.write("type,owner,access,files,dc:title,dc:abstract,dc:creator\n")
+    f.write("type,owner,access,files,dc:title,dc:abstract,dc:creator,dc:identifier\n")
     files = glob.glob("*.xml")
     for each in files:
         tree = etree.parse(each)
@@ -87,6 +87,7 @@ def createCSV(directory, outputFile):
         typeString = "Work-FindingAid"
         ownerString = "rtillman"
         accessString = "public;edit=rtillman"
+        identifierString = each.replace(".xml","")
         titleString = titleString.replace('"', '\u0022')
         getOrigination(corpXPath, famXPath, nameXPath, persXPath,tree)
         creator = creator.replace('"', '\u0022')
@@ -95,21 +96,8 @@ def createCSV(directory, outputFile):
         creator = '"' + creator + '"'
         titleString = '"' + titleString + '"'
         scopeAndContent = '"' + scopeAndContent + '"'
-        #line = typeString + "," + ownerString  + "," + accessString + "," + each + "," + titleString + "," + scopeAndContent + "," + creator + "\n"
-        f.write(typeString)
-        f.write(",")
-        f.write(ownerString)
-        f.write(",")
-        f.write(accessString)
-        f.write(",")
-        f.write(each)
-        f.write(",")
-        f.write(titleString)
-        f.write(",")
-        f.write(scopeAndContent)
-        f.write(",")
-        f.write(creator)
-        f.write("\n")
+        line = typeString + "," + ownerString  + "," + accessString + "," + each + "," + titleString + "," + scopeAndContent + "," + creator + "," + identifierString + "\n"
+        f.write(line)
 
 output = raw_input("What do you want to call the file? ")
 createCSV(directory,output)
