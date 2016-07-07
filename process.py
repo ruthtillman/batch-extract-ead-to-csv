@@ -57,11 +57,7 @@ def getScopeContent(genPath,tree):
     for para in scopeParagraphs:
         scopeAndContent = scopeAndContent + etree.tostring(para, encoding='unicode_escape', method='text').strip() + "\u000a\u000a"
 
-# Use os and glob.glob to pickup every single *.xml file and then run a full process on it. Maybe take just directory as input?
-
-directory="/Users/rtillman/Documents/Code/FindingAidsWork_Apparently_Dont_Batch_Ingest/samples"
-
-# Of course gonna have to clear variables between groups
+directory = "/Users/rtillman/Documents/Code/FindingAidsWork_Apparently_Dont_Batch_Ingest/samples" # Hardcoded. May need to be replaced.
 
 titleXPath = "/ead/control/filedesc/titlestmt/titleproper"
 scopeXPath = "/ead/archdesc/scopecontent"
@@ -72,21 +68,20 @@ nameXPath = "/ead/archdesc/did/origination/name"
 creator = ""
 scopeAndContent = ""
 
-# Actually Running It This Will Become a Function #
 def createCSV(directory, outputFile):
     global creator, scopeAndContent
     os.chdir(directory)
     f = open(outputFile, 'w')
-    f.write("type,owner,access,files,dc:title,dc:abstract,dc:creator,dc:identifier\n")
+    f.write("type,owner,access,files,dc:title,dc:abstract,dc:creator,dc:identifier\n") # Non-Notre Dame users will want to remove or replace "type,owner,access". Users may wish to rename "files" (in f.write, not as variable)
     files = glob.glob("*.xml")
     for each in files:
         tree = etree.parse(each)
         titleString = etree.tostring(tree.xpath(titleXPath)[0], method='text').strip()
         creator = ""
         scopeAndContent = ""
-        typeString = "Work-FindingAid"
-        ownerString = "rtillman"
-        accessString = "public;edit=rtillman"
+        typeString = "Work-FindingAid" # Non-Notre Dame users will want to remove or replace.
+        ownerString = "rtillman" # Non-Notre Dame users will want to remove or replace.
+        accessString = "public;edit=rtillman" # Non-Notre Dame users will want to remove or replace.
         identifierString = each.replace(".xml","")
         titleString = titleString.replace('"', '\u0022')
         getOrigination(corpXPath, famXPath, nameXPath, persXPath,tree)
