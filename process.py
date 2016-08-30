@@ -87,7 +87,7 @@ def createCSV(directory, outputFile):
     global creator, scopeAndContent
     os.chdir(directory)
     f = open(outputFile, 'w')
-    f.write("type,owner,access,files,dc:title,dc:abstract,dc:creator,dc:identifier,dc:source\n") # Non-Notre Dame users will want to remove or replace "type,owner,access". Users may wish to rename "files" (in f.write, not as variable)
+    f.write("type,owner,access,files,dc:creator#administrative_unit,dc:title,dc:abstract,dc:creator,dc:identifier,dc:source\n") # Non-Notre Dame users will want to remove or replace "type,owner,access". Users may wish to rename "files" (in f.write, not as variable)
     files = glob.glob("*.xml")
     for each in files:
         tree = etree.parse(each)
@@ -97,6 +97,7 @@ def createCSV(directory, outputFile):
         typeString = "Work-FindingAid" # Non-Notre Dame users will want to remove or replace.
         ownerString = "rtillman" # Non-Notre Dame users will want to remove or replace.
         accessString = "public;edit=rtillman" # Non-Notre Dame users will want to remove or replace.
+        departmentString = "University of Notre Dame::Hesburgh Libraries::University Archives"
         identifierString = each.replace(".xml","")
         sourceString = "http://archives.nd.edu/findaids/ead/xml/" + each # Will need to replace with local information or remove dc:source
         titleString = cleanerApp(titleString.replace('"', '\u0022'))
@@ -107,7 +108,7 @@ def createCSV(directory, outputFile):
         creator = '"' + creator + '"'
         titleString = '"' + titleString + '"'
         scopeAndContent = '"' + scopeAndContent + '"'
-        line = typeString + "," + ownerString  + "," + accessString + "," + each + "," + titleString + "," + scopeAndContent + "," + creator + "," + identifierString + "," + sourceString + "\n"
+        line = typeString + "," + ownerString + "," + accessString + "," + each + "," + departmentString + "," + titleString + "," + scopeAndContent + "," + creator + "," + identifierString + "," + sourceString + "\n"
         f.write(line)
 
 output = raw_input("What do you want to call the file? ")
