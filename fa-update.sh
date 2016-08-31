@@ -2,23 +2,22 @@
 
 now=$(date +"%Y_%m_%d")
 
-mkdir /Volumes/DCNS/data/EAD_Ingest_$now
+mkdir /Volumes/curatend-batch/data/EAD_Ingest_Update_$now
 
-echo /Volumes/DCNS/data/EAD_Ingest_$now created
+echo /Volumes/curatend-batch/data/EAD_Ingest_Update_$now created
 
 #Path may have issue if DCNS changes
 
-cd /Users/rtillman/Box\ Sync/EAD_Deposit/Update; echo Found files totalling: ; ls -l | wc -l; find . -name '*.xml' -exec mv {} /Volumes/DCNS/data/EAD_Ingest_$now \;
+cd /Users/rtillman/Box\ Sync/EAD_Deposit/Update; echo Found files totalling: ; ls -l | wc -l; find . -name '*.xml' -exec mv {} /Volumes/curatend-batch/data/EAD_Ingest_Update_$now \;
 
-cd /Volumes/DCNS/data/EAD_Ingest_$now; echo Moved files totalling: ; ls -l | wc -l;
+cd /Volumes/curatend-batch/data/EAD_Ingest_Update_$now; echo Moved files totalling: ; ls -l | wc -l;
 
-python /Users/rtillman/Documents/Code/FindingAidsWork_Apparently_Dont_Batch_Ingest/process.py
+python /Users/rtillman/Documents/Code/FindingAidsWork_Apparently_Dont_Batch_Ingest/process-update.py
 
-echo Processed files and created metadata-1.createCSV
+echo Processed files and created metadata-1.csv
 echo Type anything to unpause the process:
 read continue
 
-
-mv /Volumes/DCNS/data/EAD_Ingest_$now /Volumes/DCNS/test/libvirt9/queue
+mv /Volumes/curatend-batch/data/EAD_Ingest_Update_$now /Volumes/curatend-batch/test/libvirt9/queue
 
 echo Moved files into the TEST batch processer
