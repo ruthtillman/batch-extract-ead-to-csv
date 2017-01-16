@@ -6,7 +6,7 @@ import os, glob, re, datetime, pickle
 def lenTest(path,tree):
   return len(tree.xpath(path))
 
-lookupFile = open('/Users/rtillman/Documents/Code/FindingAidsWork_Apparently_Dont_Batch_Ingest/lookup.py', 'r')
+lookupFile = open('/Users/rtillman/Box Sync/EAD_Deposit/curate_dictionary/lookup.py', 'r')
 lookup = pickle.load(lookupFile)
 lookupFile.close()
 
@@ -102,7 +102,7 @@ def createCSV(directory, outputFile):
     global creator, scopeAndContent
     os.chdir(directory)
     f = open(outputFile, 'w')
-    f.write("type,owner,access,curate_id,files,dc:creator#administrative_unit,dc:title,dc:abstract,dc:creator,dc:source\n") # Non-Notre Dame users will want to remove or replace "type,owner,access". Users may wish to rename "files" (in f.write, not as variable)
+    f.write("type,owner,access,curate_id,files,dc:creator#administrative_unit,dc:title,dc:abstract,dc:creator,dc:source,dc:rights\n") # Non-Notre Dame users will want to remove or replace "type,owner,access". Users may wish to rename "files" (in f.write, not as variable)
     files = glob.glob("*.xml")
     for each in files:
         curate_id = lookup[each]
@@ -124,7 +124,7 @@ def createCSV(directory, outputFile):
         creator = '"' + creator + '"'
         titleString = '"' + titleString + '"'
         scopeAndContent = '"' + scopeAndContent + '"'
-        line = typeString + "," + ownerString + "," + accessString + "," + curate_id + "," + each + "," + departmentString + "," + titleString + "," + scopeAndContent + "," + creator + "," + sourceString + "\n"
+        line = typeString + "," + ownerString + "," + accessString + "," + curate_id + "," + each + "," + departmentString + "," + titleString + "," + scopeAndContent + "," + creator + "," + sourceString + "," + "All rights reserved" + "\n"
         f.write(line)
         stripProcessing(tree, each)
 

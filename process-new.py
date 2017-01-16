@@ -102,7 +102,7 @@ def createCSV(directory, outputFile):
     files = glob.glob("*.xml")
     for each in files:
         tree = etree.parse(each)
-        titleString = etree.tostring(tree.xpath(titleXPath)[0], method='text').strip()
+        titleString = cleanerApp(etree.tostring(tree.xpath(titleXPath)[0], encoding='UTF-8', method='text').strip())
         creator = ""
         scopeAndContent = ""
         typeString = "Work-FindingAid" # Non-Notre Dame users will want to remove or replace.
