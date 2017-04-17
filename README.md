@@ -8,7 +8,16 @@ The extractor adds hardcoded fields for `type`, `owner`, and `access` and the fi
 
 ## To use
 
-1. Edit variable `directory` (line 61) or turn it into a `raw_input` string and add to the end.
-2. Edit appropriate lines in `createCSV` (line 72). Lines which should be considered have comments explaining the internal uses.
-3. Make any decisions in line 11 re: the desired separator between `<part>` elements
+1. Open `fa-new.sh`. Make sure the batch ingest path to batch is correct. Many lines.
+2. Open `process.py` and ensure `directory` on line 86 is the correct path to the batch.
+
+## To adapt
+
+1. Edit variable `directory` (line 86) or turn it into a `raw_input` string and add to the end.
+2. Edit appropriate lines in `createCSV` (line 125). Lines which should be considered have comments explaining the internal uses.
+3. Make any decisions in line 25 re: the desired separator between `<part>` elements
 4. Run `python process.py`
+
+## To update
+
+Make the path to batch ingest something in fa-new.sh and then passed to process-new.py
